@@ -1,0 +1,2513 @@
+{
+    "metadata": {
+        "dataset": "WinoGrande",
+        "anchor_sample_index": 47,
+        "anchor_question": "Question: It was easy for Angela to become a vegetarian although Kayla couldn't do it. _ really missed the taste of chicken., Options: Angela or Kayla.",
+        "injected_reasoning_tokens": "Thinking Process:\n\n1.  **Analyze the Request:**\n    *   Input: A sentence with a blank (\"_ really missed the taste of chicken.\") and two options (Angela or Kayla).\n    *   Context: \"It was easy for Angela to become a vegetarian although Kayla couldn't do it.\"\n    *   Task: Fill in the blank with the logically correct option.\n    *   Constraint: Provide *only* the correct option as the answer.\n\n2.  **Analyze the Sentence Context:**\n    *   Clause 1: \"It was easy for Angela to become a vegetarian...\" (Angela *can* become/has become a vegetarian).\n    *   Clause 2: \"...although Kayla couldn't do it.\" (Kayla *cannot* become a vegetarian).\n    *   Implied meaning: Angela gave up meat (became vegetarian), while Kayla did not give up meat (didn't do it).\n    *   Clause 3 (The blank): \"____ really missed the taste of chicken.\"\n    *   Logic: Who misses chicken? The person who eats chicken.\n    *   Angela is a vegetarian (no chicken). Therefore, she would not miss chicken or would not really miss it based on the context of her dietary change being \"easy\" (often implying no strong emotional struggle).\n    *   Kayla couldn't do it (didn't become vegetarian). Therefore, Kayla still eats meat/chicken.\n    *   Consequently, Kayla is the one who would \"miss the taste of chicken.\"\n\n3.  **Evaluate Options:**\n    *   Option 1: Angela (Vegetarian, no chicken). Unlikely to miss chicken in the context of the first part.\n    *   Option 2: Kayla (Not vegetarian, eats chicken). Logical to say she missed the taste.\n\n4.  **Formulate Output:**\n    *   Constraint: \"Please provide only the correct option as the answer.\"\n    *   Draft: Kayla.\n\n5.  **Final Check:**\n    *   Does \"Kayla really missed the taste of chicken\" make sense given the premise? Yes.\n    *   Does \"Angela really missed the taste of chicken\" make sense? No, she's a vegetarian.\n    *   Is the output format correct? Yes, just the name.\n\n6.  **Final Decision:** Kayla.cw",
+        "system_prompt": "You are a meticulous assistant. Fill in the blank (_) in the sentence with the logically correct option.",
+        "baseline_prompt_structure": "Question: {sentence} Options: {option1} or {option2}. Please provide only the correct option as the answer.",
+        "injected_prompt_structure": "Question: {sentence} Options: {option1} or {option2}. Please provide only the correct option as the answer. \n\n Here is some reasoning to help you: {preprocessed_reasoning_tokens}. \n\n Let me repeat the question: {sentence} Choose one of the two options: {option1} or {option2}. Only answer with the correct option for the question, and not with the reasoning tokens."
+    },
+    "results": {
+        "sample_000": {
+            "solution": "Maria",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_001": {
+            "solution": "Sarah",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_002": {
+            "solution": "bed",
+            "llm_baseline": "bed",
+            "llm_preprocessedReasoning": "blanket"
+        },
+        "sample_003": {
+            "solution": "eggplant",
+            "llm_baseline": "eggplant",
+            "llm_preprocessedReasoning": "eggplant"
+        },
+        "sample_004": {
+            "solution": "Jeffrey",
+            "llm_baseline": "Hunter",
+            "llm_preprocessedReasoning": "Hunter"
+        },
+        "sample_005": {
+            "solution": "Sarah",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_006": {
+            "solution": "home",
+            "llm_baseline": "home",
+            "llm_preprocessedReasoning": "home"
+        },
+        "sample_007": {
+            "solution": "house",
+            "llm_baseline": "house",
+            "llm_preprocessedReasoning": "house"
+        },
+        "sample_008": {
+            "solution": "Jennifer",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_009": {
+            "solution": "bakery",
+            "llm_baseline": "bank",
+            "llm_preprocessedReasoning": "bank"
+        },
+        "sample_010": {
+            "solution": "bank",
+            "llm_baseline": "bakery",
+            "llm_preprocessedReasoning": "bakery"
+        },
+        "sample_011": {
+            "solution": "class",
+            "llm_baseline": "class",
+            "llm_preprocessedReasoning": "class"
+        },
+        "sample_012": {
+            "solution": "story",
+            "llm_baseline": "story",
+            "llm_preprocessedReasoning": "story"
+        },
+        "sample_013": {
+            "solution": "cafe",
+            "llm_baseline": "cafe",
+            "llm_preprocessedReasoning": "cafe"
+        },
+        "sample_014": {
+            "solution": "library",
+            "llm_baseline": "library",
+            "llm_preprocessedReasoning": "library"
+        },
+        "sample_015": {
+            "solution": "Lindsey",
+            "llm_baseline": "Lindsey",
+            "llm_preprocessedReasoning": "Lindsey"
+        },
+        "sample_016": {
+            "solution": "Leslie",
+            "llm_baseline": "Michael",
+            "llm_preprocessedReasoning": "Leslie"
+        },
+        "sample_017": {
+            "solution": "Michael",
+            "llm_baseline": "Leslie",
+            "llm_preprocessedReasoning": "Leslie"
+        },
+        "sample_018": {
+            "solution": "Leslie",
+            "llm_baseline": "Neil",
+            "llm_preprocessedReasoning": "Neil"
+        },
+        "sample_019": {
+            "solution": "Adam",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_020": {
+            "solution": "frosting",
+            "llm_baseline": "frosting",
+            "llm_preprocessedReasoning": "frosting"
+        },
+        "sample_021": {
+            "solution": "Brett",
+            "llm_baseline": "Brett",
+            "llm_preprocessedReasoning": "Brett"
+        },
+        "sample_022": {
+            "solution": "Amy",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_023": {
+            "solution": "work",
+            "llm_baseline": "strength",
+            "llm_preprocessedReasoning": "strength"
+        },
+        "sample_024": {
+            "solution": "strength",
+            "llm_baseline": "work",
+            "llm_preprocessedReasoning": "strength"
+        },
+        "sample_025": {
+            "solution": "Rachel",
+            "llm_baseline": "Rachel",
+            "llm_preprocessedReasoning": "Rachel"
+        },
+        "sample_026": {
+            "solution": "Leslie",
+            "llm_baseline": "Leslie",
+            "llm_preprocessedReasoning": "Leslie"
+        },
+        "sample_027": {
+            "solution": "portions",
+            "llm_baseline": "portions",
+            "llm_preprocessedReasoning": "sizes"
+        },
+        "sample_028": {
+            "solution": "Craig",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Craig"
+        },
+        "sample_029": {
+            "solution": "Christine",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_030": {
+            "solution": "desks",
+            "llm_baseline": "desks",
+            "llm_preprocessedReasoning": "desks"
+        },
+        "sample_031": {
+            "solution": "Mary",
+            "llm_baseline": "Mary",
+            "llm_preprocessedReasoning": "Mary"
+        },
+        "sample_032": {
+            "solution": "Rachel",
+            "llm_baseline": "Rachel",
+            "llm_preprocessedReasoning": "Rachel"
+        },
+        "sample_033": {
+            "solution": "Leslie",
+            "llm_baseline": "Kyle",
+            "llm_preprocessedReasoning": "Kyle"
+        },
+        "sample_034": {
+            "solution": "Betty",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Betty"
+        },
+        "sample_035": {
+            "solution": "floor",
+            "llm_baseline": "floor",
+            "llm_preprocessedReasoning": "floor"
+        },
+        "sample_036": {
+            "solution": "Eric",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Joel"
+        },
+        "sample_037": {
+            "solution": "Tanya",
+            "llm_baseline": "Tanya",
+            "llm_preprocessedReasoning": "Emily"
+        },
+        "sample_038": {
+            "solution": "Lindsey",
+            "llm_baseline": "Angela",
+            "llm_preprocessedReasoning": "Angela"
+        },
+        "sample_039": {
+            "solution": "Joseph",
+            "llm_baseline": "Joseph",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_040": {
+            "solution": "Brian",
+            "llm_baseline": "Brian",
+            "llm_preprocessedReasoning": "Brett"
+        },
+        "sample_041": {
+            "solution": "letters",
+            "llm_baseline": "eyes",
+            "llm_preprocessedReasoning": "letters"
+        },
+        "sample_042": {
+            "solution": "hat",
+            "llm_baseline": "hat",
+            "llm_preprocessedReasoning": "dress"
+        },
+        "sample_043": {
+            "solution": "dress",
+            "llm_baseline": "hat",
+            "llm_preprocessedReasoning": "hat"
+        },
+        "sample_044": {
+            "solution": "Felicia",
+            "llm_baseline": "Felicia",
+            "llm_preprocessedReasoning": "Felicia"
+        },
+        "sample_045": {
+            "solution": "Craig",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_046": {
+            "solution": "William",
+            "llm_baseline": "William",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_047": {
+            "solution": "Kayla",
+            "llm_baseline": "Kayla",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_048": {
+            "solution": "Logan",
+            "llm_baseline": "Logan",
+            "llm_preprocessedReasoning": "Hunter"
+        },
+        "sample_049": {
+            "solution": "Tanya",
+            "llm_baseline": "Tanya",
+            "llm_preprocessedReasoning": "Tanya"
+        },
+        "sample_050": {
+            "solution": "brush",
+            "llm_baseline": "The crack",
+            "llm_preprocessedReasoning": "brush"
+        },
+        "sample_051": {
+            "solution": "crack",
+            "llm_baseline": "brush",
+            "llm_preprocessedReasoning": "crack"
+        },
+        "sample_052": {
+            "solution": "newspaper",
+            "llm_baseline": "newspaper",
+            "llm_preprocessedReasoning": "newspaper"
+        },
+        "sample_053": {
+            "solution": "Natalie",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_054": {
+            "solution": "Jennifer",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_055": {
+            "solution": "Ryan",
+            "llm_baseline": "Ryan",
+            "llm_preprocessedReasoning": "Matthew"
+        },
+        "sample_056": {
+            "solution": "distance",
+            "llm_baseline": "food",
+            "llm_preprocessedReasoning": "distance"
+        },
+        "sample_057": {
+            "solution": "Brian",
+            "llm_baseline": "Brian",
+            "llm_preprocessedReasoning": "Brian"
+        },
+        "sample_058": {
+            "solution": "Nick",
+            "llm_baseline": "Dennis",
+            "llm_preprocessedReasoning": "Dennis"
+        },
+        "sample_059": {
+            "solution": "Monica",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Monica"
+        },
+        "sample_060": {
+            "solution": "war",
+            "llm_baseline": "war",
+            "llm_preprocessedReasoning": "war"
+        },
+        "sample_061": {
+            "solution": "Erin",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Erin"
+        },
+        "sample_062": {
+            "solution": "table",
+            "llm_baseline": "table",
+            "llm_preprocessedReasoning": "phone"
+        },
+        "sample_063": {
+            "solution": "phone",
+            "llm_baseline": "phone",
+            "llm_preprocessedReasoning": "phone"
+        },
+        "sample_064": {
+            "solution": "air",
+            "llm_baseline": "air",
+            "llm_preprocessedReasoning": "air"
+        },
+        "sample_065": {
+            "solution": "rags",
+            "llm_baseline": "nozzles",
+            "llm_preprocessedReasoning": "rags"
+        },
+        "sample_066": {
+            "solution": "ear",
+            "llm_baseline": "piercing",
+            "llm_preprocessedReasoning": "piercing"
+        },
+        "sample_067": {
+            "solution": "piercing",
+            "llm_baseline": "piercing",
+            "llm_preprocessedReasoning": "piercing"
+        },
+        "sample_068": {
+            "solution": "Felicia",
+            "llm_baseline": "Felicia",
+            "llm_preprocessedReasoning": "Laura"
+        },
+        "sample_069": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_070": {
+            "solution": "shirt",
+            "llm_baseline": "shirt",
+            "llm_preprocessedReasoning": "shirt"
+        },
+        "sample_071": {
+            "solution": "paint",
+            "llm_baseline": "paint",
+            "llm_preprocessedReasoning": "paint"
+        },
+        "sample_072": {
+            "solution": "glow sticks",
+            "llm_baseline": "glow sticks",
+            "llm_preprocessedReasoning": "glow sticks"
+        },
+        "sample_073": {
+            "solution": "Joseph",
+            "llm_baseline": "Joel",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_074": {
+            "solution": "Joel",
+            "llm_baseline": "Joseph",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_075": {
+            "solution": "shirt",
+            "llm_baseline": "shirt",
+            "llm_preprocessedReasoning": "shirt"
+        },
+        "sample_076": {
+            "solution": "Patricia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Mary"
+        },
+        "sample_077": {
+            "solution": "Mary",
+            "llm_baseline": "Mary",
+            "llm_preprocessedReasoning": "Mary"
+        },
+        "sample_078": {
+            "solution": "house",
+            "llm_baseline": "playground",
+            "llm_preprocessedReasoning": "playground"
+        },
+        "sample_079": {
+            "solution": "Aaron",
+            "llm_baseline": "Dennis",
+            "llm_preprocessedReasoning": "Dennis"
+        },
+        "sample_080": {
+            "solution": "Dennis",
+            "llm_baseline": "Dennis",
+            "llm_preprocessedReasoning": "Dennis"
+        },
+        "sample_081": {
+            "solution": "day",
+            "llm_baseline": "night",
+            "llm_preprocessedReasoning": "day"
+        },
+        "sample_082": {
+            "solution": "Joel",
+            "llm_baseline": "Joel",
+            "llm_preprocessedReasoning": "Joel"
+        },
+        "sample_083": {
+            "solution": "living room",
+            "llm_baseline": "living room",
+            "llm_preprocessedReasoning": "living room"
+        },
+        "sample_084": {
+            "solution": "bedroom",
+            "llm_baseline": "bedroom",
+            "llm_preprocessedReasoning": "bedroom"
+        },
+        "sample_085": {
+            "solution": "Amy",
+            "llm_baseline": "Samantha",
+            "llm_preprocessedReasoning": "Samantha"
+        },
+        "sample_086": {
+            "solution": "Jessica",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Megan"
+        },
+        "sample_087": {
+            "solution": "Megan",
+            "llm_baseline": "Megan",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_088": {
+            "solution": "Natalie",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Natalie"
+        },
+        "sample_089": {
+            "solution": "Amy",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_090": {
+            "solution": "woven necklace",
+            "llm_baseline": "ball",
+            "llm_preprocessedReasoning": "ball"
+        },
+        "sample_091": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_092": {
+            "solution": "doors",
+            "llm_baseline": "desks",
+            "llm_preprocessedReasoning": "desks"
+        },
+        "sample_093": {
+            "solution": "desks",
+            "llm_baseline": "desks",
+            "llm_preprocessedReasoning": "doors"
+        },
+        "sample_094": {
+            "solution": "bark",
+            "llm_baseline": "bark",
+            "llm_preprocessedReasoning": "stone"
+        },
+        "sample_095": {
+            "solution": "stone",
+            "llm_baseline": "stone",
+            "llm_preprocessedReasoning": "stone"
+        },
+        "sample_096": {
+            "solution": "body",
+            "llm_baseline": "body",
+            "llm_preprocessedReasoning": "body"
+        },
+        "sample_097": {
+            "solution": "sheet",
+            "llm_baseline": "The sheet",
+            "llm_preprocessedReasoning": "sheet"
+        },
+        "sample_098": {
+            "solution": "space",
+            "llm_baseline": "space",
+            "llm_preprocessedReasoning": "sheet"
+        },
+        "sample_099": {
+            "solution": "couch",
+            "llm_baseline": "couch",
+            "llm_preprocessedReasoning": "couch"
+        },
+        "sample_100": {
+            "solution": "Craig",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Craig"
+        },
+        "sample_101": {
+            "solution": "Steven",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Craig"
+        },
+        "sample_102": {
+            "solution": "dinner",
+            "llm_baseline": "dinner",
+            "llm_preprocessedReasoning": "dinner"
+        },
+        "sample_103": {
+            "solution": "Angela",
+            "llm_baseline": "Rebecca",
+            "llm_preprocessedReasoning": "Rebecca"
+        },
+        "sample_104": {
+            "solution": "Rebecca",
+            "llm_baseline": "Rebecca",
+            "llm_preprocessedReasoning": "Rebecca"
+        },
+        "sample_105": {
+            "solution": "cash",
+            "llm_baseline": "cash",
+            "llm_preprocessedReasoning": "cash"
+        },
+        "sample_106": {
+            "solution": "Christine",
+            "llm_baseline": "Christine",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_107": {
+            "solution": "pie",
+            "llm_baseline": "pie",
+            "llm_preprocessedReasoning": "pie"
+        },
+        "sample_108": {
+            "solution": "surgery",
+            "llm_baseline": "diet",
+            "llm_preprocessedReasoning": "surgery"
+        },
+        "sample_109": {
+            "solution": "Rachel",
+            "llm_baseline": "Rachel",
+            "llm_preprocessedReasoning": "Rachel"
+        },
+        "sample_110": {
+            "solution": "Megan",
+            "llm_baseline": "Rachel",
+            "llm_preprocessedReasoning": "Megan"
+        },
+        "sample_111": {
+            "solution": "Kayla",
+            "llm_baseline": "Kayla",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_112": {
+            "solution": "Randy",
+            "llm_baseline": "Randy",
+            "llm_preprocessedReasoning": "Randy"
+        },
+        "sample_113": {
+            "solution": "Dennis",
+            "llm_baseline": "Jeffrey",
+            "llm_preprocessedReasoning": "Jeffrey"
+        },
+        "sample_114": {
+            "solution": "Elena",
+            "llm_baseline": "Elena",
+            "llm_preprocessedReasoning": "Elena"
+        },
+        "sample_115": {
+            "solution": "Betty",
+            "llm_baseline": "Betty",
+            "llm_preprocessedReasoning": "Betty"
+        },
+        "sample_116": {
+            "solution": "sofa",
+            "llm_baseline": "offer",
+            "llm_preprocessedReasoning": "sofa"
+        },
+        "sample_117": {
+            "solution": "books",
+            "llm_baseline": "books",
+            "llm_preprocessedReasoning": "books"
+        },
+        "sample_118": {
+            "solution": "leaves",
+            "llm_baseline": "books",
+            "llm_preprocessedReasoning": "books"
+        },
+        "sample_119": {
+            "solution": "auditorium",
+            "llm_baseline": "park",
+            "llm_preprocessedReasoning": "park"
+        },
+        "sample_120": {
+            "solution": "park",
+            "llm_baseline": "auditorium",
+            "llm_preprocessedReasoning": "park"
+        },
+        "sample_121": {
+            "solution": "Steven",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Robert"
+        },
+        "sample_122": {
+            "solution": "Robert",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Robert"
+        },
+        "sample_123": {
+            "solution": "apple",
+            "llm_baseline": "apple",
+            "llm_preprocessedReasoning": "apple"
+        },
+        "sample_124": {
+            "solution": "braces",
+            "llm_baseline": "glasses",
+            "llm_preprocessedReasoning": "glasses"
+        },
+        "sample_125": {
+            "solution": "glasses",
+            "llm_baseline": "glasses",
+            "llm_preprocessedReasoning": "glasses"
+        },
+        "sample_126": {
+            "solution": "Ian",
+            "llm_baseline": "Randy",
+            "llm_preprocessedReasoning": "Randy"
+        },
+        "sample_127": {
+            "solution": "Joseph",
+            "llm_baseline": "Joseph",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_128": {
+            "solution": "Adam",
+            "llm_baseline": "Joseph",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_129": {
+            "solution": "factory",
+            "llm_baseline": "plant",
+            "llm_preprocessedReasoning": "factory"
+        },
+        "sample_130": {
+            "solution": "William",
+            "llm_baseline": "William",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_131": {
+            "solution": "Rachel",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_132": {
+            "solution": "rattle",
+            "llm_baseline": "bottle",
+            "llm_preprocessedReasoning": "bottle"
+        },
+        "sample_133": {
+            "solution": "Samantha",
+            "llm_baseline": "Samantha",
+            "llm_preprocessedReasoning": "Rebecca"
+        },
+        "sample_134": {
+            "solution": "Michael",
+            "llm_baseline": "Aaron",
+            "llm_preprocessedReasoning": "Michael"
+        },
+        "sample_135": {
+            "solution": "Jennifer",
+            "llm_baseline": "Jennifer",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_136": {
+            "solution": "room",
+            "llm_baseline": "clock",
+            "llm_preprocessedReasoning": "room"
+        },
+        "sample_137": {
+            "solution": "Donald",
+            "llm_baseline": "Donald",
+            "llm_preprocessedReasoning": "Donald"
+        },
+        "sample_138": {
+            "solution": "Logan",
+            "llm_baseline": "Donald",
+            "llm_preprocessedReasoning": "Donald"
+        },
+        "sample_139": {
+            "solution": "Ryan",
+            "llm_baseline": "Ryan",
+            "llm_preprocessedReasoning": "Kyle"
+        },
+        "sample_140": {
+            "solution": "house",
+            "llm_baseline": "wind",
+            "llm_preprocessedReasoning": "wind"
+        },
+        "sample_141": {
+            "solution": "Samantha",
+            "llm_baseline": "Samantha",
+            "llm_preprocessedReasoning": "Betty"
+        },
+        "sample_142": {
+            "solution": "Rebecca",
+            "llm_baseline": "Rebecca",
+            "llm_preprocessedReasoning": "Maria"
+        },
+        "sample_143": {
+            "solution": "jewelry",
+            "llm_baseline": "card",
+            "llm_preprocessedReasoning": "card"
+        },
+        "sample_144": {
+            "solution": "Laura",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Monica"
+        },
+        "sample_145": {
+            "solution": "Monica",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Laura"
+        },
+        "sample_146": {
+            "solution": "internet",
+            "llm_baseline": "internet",
+            "llm_preprocessedReasoning": "cable"
+        },
+        "sample_147": {
+            "solution": "cable",
+            "llm_baseline": "cable",
+            "llm_preprocessedReasoning": "cable"
+        },
+        "sample_148": {
+            "solution": "Mary",
+            "llm_baseline": "Mary",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_149": {
+            "solution": "Matthew",
+            "llm_baseline": "Matthew",
+            "llm_preprocessedReasoning": "Matthew"
+        },
+        "sample_150": {
+            "solution": "Megan",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Monica"
+        },
+        "sample_151": {
+            "solution": "eyelashes",
+            "llm_baseline": "eyebrows",
+            "llm_preprocessedReasoning": "eyelashes"
+        },
+        "sample_152": {
+            "solution": "Samuel",
+            "llm_baseline": "Brett",
+            "llm_preprocessedReasoning": "Brett"
+        },
+        "sample_153": {
+            "solution": "Kayla",
+            "llm_baseline": "Kayla",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_154": {
+            "solution": "watch",
+            "llm_baseline": "watch",
+            "llm_preprocessedReasoning": "watch"
+        },
+        "sample_155": {
+            "solution": "Michael",
+            "llm_baseline": "Michael",
+            "llm_preprocessedReasoning": "Michael"
+        },
+        "sample_156": {
+            "solution": "house",
+            "llm_baseline": "house",
+            "llm_preprocessedReasoning": "office"
+        },
+        "sample_157": {
+            "solution": "Patricia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Felicia"
+        },
+        "sample_158": {
+            "solution": "Felicia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Felicia"
+        },
+        "sample_159": {
+            "solution": "Elena",
+            "llm_baseline": "Elena",
+            "llm_preprocessedReasoning": "Elena"
+        },
+        "sample_160": {
+            "solution": "Kyle",
+            "llm_baseline": "Kyle",
+            "llm_preprocessedReasoning": "Kyle"
+        },
+        "sample_161": {
+            "solution": "William",
+            "llm_baseline": "Kyle",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_162": {
+            "solution": "canoe",
+            "llm_baseline": "canoe",
+            "llm_preprocessedReasoning": "raft"
+        },
+        "sample_163": {
+            "solution": "Jessica",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_164": {
+            "solution": "gun",
+            "llm_baseline": "cloth",
+            "llm_preprocessedReasoning": "gun"
+        },
+        "sample_165": {
+            "solution": "cloth",
+            "llm_baseline": "cloth",
+            "llm_preprocessedReasoning": "cloth"
+        },
+        "sample_166": {
+            "solution": "hammer",
+            "llm_baseline": "hammer",
+            "llm_preprocessedReasoning": "hammer"
+        },
+        "sample_167": {
+            "solution": "screwdriver",
+            "llm_baseline": "hammer",
+            "llm_preprocessedReasoning": "hammer"
+        },
+        "sample_168": {
+            "solution": "winter",
+            "llm_baseline": "winter",
+            "llm_preprocessedReasoning": "winter"
+        },
+        "sample_169": {
+            "solution": "Ian",
+            "llm_baseline": "Ian",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_170": {
+            "solution": "Vase",
+            "llm_baseline": "Vase",
+            "llm_preprocessedReasoning": "Urn"
+        },
+        "sample_171": {
+            "solution": "Urn",
+            "llm_baseline": "urn",
+            "llm_preprocessedReasoning": "Urn"
+        },
+        "sample_172": {
+            "solution": "school",
+            "llm_baseline": "school",
+            "llm_preprocessedReasoning": "school"
+        },
+        "sample_173": {
+            "solution": "Jessica",
+            "llm_baseline": "Samantha",
+            "llm_preprocessedReasoning": "Samantha"
+        },
+        "sample_174": {
+            "solution": "car",
+            "llm_baseline": "car",
+            "llm_preprocessedReasoning": "car"
+        },
+        "sample_175": {
+            "solution": "city",
+            "llm_baseline": "village",
+            "llm_preprocessedReasoning": "city"
+        },
+        "sample_176": {
+            "solution": "Rachel",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Rachel"
+        },
+        "sample_177": {
+            "solution": "Patricia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Patricia"
+        },
+        "sample_178": {
+            "solution": "Neil",
+            "llm_baseline": "Samuel",
+            "llm_preprocessedReasoning": "Neil"
+        },
+        "sample_179": {
+            "solution": "color",
+            "llm_baseline": "color",
+            "llm_preprocessedReasoning": "color"
+        },
+        "sample_180": {
+            "solution": "garage",
+            "llm_baseline": "drums",
+            "llm_preprocessedReasoning": "garage"
+        },
+        "sample_181": {
+            "solution": "Rebecca",
+            "llm_baseline": "Rebecca",
+            "llm_preprocessedReasoning": "Rebecca"
+        },
+        "sample_182": {
+            "solution": "water",
+            "llm_baseline": "water",
+            "llm_preprocessedReasoning": "water"
+        },
+        "sample_183": {
+            "solution": "sand",
+            "llm_baseline": "sand",
+            "llm_preprocessedReasoning": "sand"
+        },
+        "sample_184": {
+            "solution": "warts",
+            "llm_baseline": "warts",
+            "llm_preprocessedReasoning": "warts"
+        },
+        "sample_185": {
+            "solution": "blanket",
+            "llm_baseline": "sheet",
+            "llm_preprocessedReasoning": "sheet"
+        },
+        "sample_186": {
+            "solution": "PVC",
+            "llm_baseline": "PVC",
+            "llm_preprocessedReasoning": "PVC"
+        },
+        "sample_187": {
+            "solution": "Rebecca",
+            "llm_baseline": "Rebecca",
+            "llm_preprocessedReasoning": "Rebecca"
+        },
+        "sample_188": {
+            "solution": "Adam",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_189": {
+            "solution": "puncture",
+            "llm_baseline": "puncture",
+            "llm_preprocessedReasoning": "puncture"
+        },
+        "sample_190": {
+            "solution": "Emily",
+            "llm_baseline": "Emily",
+            "llm_preprocessedReasoning": "Emily"
+        },
+        "sample_191": {
+            "solution": "leather",
+            "llm_baseline": "silk",
+            "llm_preprocessedReasoning": "silk"
+        },
+        "sample_192": {
+            "solution": "Lawrence",
+            "llm_baseline": "Lawrence",
+            "llm_preprocessedReasoning": "Lawrence"
+        },
+        "sample_193": {
+            "solution": "Nick",
+            "llm_baseline": "Lawrence",
+            "llm_preprocessedReasoning": "Nick"
+        },
+        "sample_194": {
+            "solution": "camera",
+            "llm_baseline": "tray",
+            "llm_preprocessedReasoning": "camera"
+        },
+        "sample_195": {
+            "solution": "Brett",
+            "llm_baseline": "Brett",
+            "llm_preprocessedReasoning": "Nelson"
+        },
+        "sample_196": {
+            "solution": "Nelson",
+            "llm_baseline": "Nelson",
+            "llm_preprocessedReasoning": "Brett"
+        },
+        "sample_197": {
+            "solution": "Adam",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_198": {
+            "solution": "Craig",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Eric"
+        },
+        "sample_199": {
+            "solution": "Eric",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Eric"
+        },
+        "sample_200": {
+            "solution": "Victoria",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_201": {
+            "solution": "Sarah",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_202": {
+            "solution": "Randy",
+            "llm_baseline": "Randy",
+            "llm_preprocessedReasoning": "Randy"
+        },
+        "sample_203": {
+            "solution": "Cynthia",
+            "llm_baseline": "Laura",
+            "llm_preprocessedReasoning": "Laura"
+        },
+        "sample_204": {
+            "solution": "Laura",
+            "llm_baseline": "Laura",
+            "llm_preprocessedReasoning": "Laura"
+        },
+        "sample_205": {
+            "solution": "tables",
+            "llm_baseline": "chairs",
+            "llm_preprocessedReasoning": "tables"
+        },
+        "sample_206": {
+            "solution": "chairs",
+            "llm_baseline": "chairs",
+            "llm_preprocessedReasoning": "chairs"
+        },
+        "sample_207": {
+            "solution": "Steven",
+            "llm_baseline": "Steven",
+            "llm_preprocessedReasoning": "Steven"
+        },
+        "sample_208": {
+            "solution": "shoe",
+            "llm_baseline": "nail",
+            "llm_preprocessedReasoning": "shoe"
+        },
+        "sample_209": {
+            "solution": "Jason",
+            "llm_baseline": "Jason",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_210": {
+            "solution": "Lawrence",
+            "llm_baseline": "Jason",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_211": {
+            "solution": "rock",
+            "llm_baseline": "fishing line",
+            "llm_preprocessedReasoning": "fishing line"
+        },
+        "sample_212": {
+            "solution": "fruits",
+            "llm_baseline": "vegetables",
+            "llm_preprocessedReasoning": "fruits"
+        },
+        "sample_213": {
+            "solution": "Elena",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Victoria"
+        },
+        "sample_214": {
+            "solution": "Victoria",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Victoria"
+        },
+        "sample_215": {
+            "solution": "hookup",
+            "llm_baseline": "past due",
+            "llm_preprocessedReasoning": "hookup"
+        },
+        "sample_216": {
+            "solution": "Cynthia",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_217": {
+            "solution": "Ian",
+            "llm_baseline": "Ian",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_218": {
+            "solution": "tomatoes",
+            "llm_baseline": "tomatoes",
+            "llm_preprocessedReasoning": "tomatoes"
+        },
+        "sample_219": {
+            "solution": "Joseph",
+            "llm_baseline": "Joseph",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_220": {
+            "solution": "store",
+            "llm_baseline": "store",
+            "llm_preprocessedReasoning": "store"
+        },
+        "sample_221": {
+            "solution": "garden",
+            "llm_baseline": "garden",
+            "llm_preprocessedReasoning": "store"
+        },
+        "sample_222": {
+            "solution": "Samantha",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_223": {
+            "solution": "Brett",
+            "llm_baseline": "Justin",
+            "llm_preprocessedReasoning": "Brett"
+        },
+        "sample_224": {
+            "solution": "Justin",
+            "llm_baseline": "Justin",
+            "llm_preprocessedReasoning": "Justin"
+        },
+        "sample_225": {
+            "solution": "William",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_226": {
+            "solution": "garage",
+            "llm_baseline": "garage",
+            "llm_preprocessedReasoning": "garage"
+        },
+        "sample_227": {
+            "solution": "Adam",
+            "llm_baseline": "Kevin",
+            "llm_preprocessedReasoning": "Kevin"
+        },
+        "sample_228": {
+            "solution": "Victoria",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Victoria"
+        },
+        "sample_229": {
+            "solution": "Carrie",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Victoria"
+        },
+        "sample_230": {
+            "solution": "gym",
+            "llm_baseline": "gym",
+            "llm_preprocessedReasoning": "bar"
+        },
+        "sample_231": {
+            "solution": "bar",
+            "llm_baseline": "gym",
+            "llm_preprocessedReasoning": "gym"
+        },
+        "sample_232": {
+            "solution": "Samuel",
+            "llm_baseline": "Randy",
+            "llm_preprocessedReasoning": "Samuel"
+        },
+        "sample_233": {
+            "solution": "Elena",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Elena"
+        },
+        "sample_234": {
+            "solution": "Amy",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_235": {
+            "solution": "Ryan",
+            "llm_baseline": "Ryan",
+            "llm_preprocessedReasoning": "Ryan"
+        },
+        "sample_236": {
+            "solution": "Natalie",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_237": {
+            "solution": "Victoria",
+            "llm_baseline": "Emily",
+            "llm_preprocessedReasoning": "Emily"
+        },
+        "sample_238": {
+            "solution": "Emily",
+            "llm_baseline": "Emily",
+            "llm_preprocessedReasoning": "Emily"
+        },
+        "sample_239": {
+            "solution": "Mary",
+            "llm_baseline": "Rachel",
+            "llm_preprocessedReasoning": "Rachel"
+        },
+        "sample_240": {
+            "solution": "Jason",
+            "llm_baseline": "Jason",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_241": {
+            "solution": "Natalie",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Natalie"
+        },
+        "sample_242": {
+            "solution": "court",
+            "llm_baseline": "company",
+            "llm_preprocessedReasoning": "court"
+        },
+        "sample_243": {
+            "solution": "Tablet",
+            "llm_baseline": "Tablet",
+            "llm_preprocessedReasoning": "Tablet"
+        },
+        "sample_244": {
+            "solution": "Phone",
+            "llm_baseline": "Tablet",
+            "llm_preprocessedReasoning": "Phone"
+        },
+        "sample_245": {
+            "solution": "Logan",
+            "llm_baseline": "Neil",
+            "llm_preprocessedReasoning": "Neil"
+        },
+        "sample_246": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_247": {
+            "solution": "region",
+            "llm_baseline": "region",
+            "llm_preprocessedReasoning": "people"
+        },
+        "sample_248": {
+            "solution": "Samantha",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_249": {
+            "solution": "Donald",
+            "llm_baseline": "Jason",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_250": {
+            "solution": "Jason",
+            "llm_baseline": "Donald",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_251": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Emily"
+        },
+        "sample_252": {
+            "solution": "Emily",
+            "llm_baseline": "Emily",
+            "llm_preprocessedReasoning": "Emily"
+        },
+        "sample_253": {
+            "solution": "Ian",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Craig"
+        },
+        "sample_254": {
+            "solution": "Craig",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_255": {
+            "solution": "wool",
+            "llm_baseline": "wool",
+            "llm_preprocessedReasoning": "wool"
+        },
+        "sample_256": {
+            "solution": "cotton",
+            "llm_baseline": "wool",
+            "llm_preprocessedReasoning": "wool"
+        },
+        "sample_257": {
+            "solution": "contacts",
+            "llm_baseline": "glasses",
+            "llm_preprocessedReasoning": "glasses"
+        },
+        "sample_258": {
+            "solution": "paper",
+            "llm_baseline": "paper",
+            "llm_preprocessedReasoning": "exam"
+        },
+        "sample_259": {
+            "solution": "diner",
+            "llm_baseline": "supermarket",
+            "llm_preprocessedReasoning": "supermarket"
+        },
+        "sample_260": {
+            "solution": "pencil",
+            "llm_baseline": "pencil",
+            "llm_preprocessedReasoning": "pencil"
+        },
+        "sample_261": {
+            "solution": "William",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_262": {
+            "solution": "urn",
+            "llm_baseline": "urn",
+            "llm_preprocessedReasoning": "urn"
+        },
+        "sample_263": {
+            "solution": "Jennifer",
+            "llm_baseline": "Jennifer",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_264": {
+            "solution": "Sarah",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_265": {
+            "solution": "Kevin",
+            "llm_baseline": "Kevin",
+            "llm_preprocessedReasoning": "Kevin"
+        },
+        "sample_266": {
+            "solution": "Neil",
+            "llm_baseline": "Kevin",
+            "llm_preprocessedReasoning": "Neil"
+        },
+        "sample_267": {
+            "solution": "house",
+            "llm_baseline": "house",
+            "llm_preprocessedReasoning": "library"
+        },
+        "sample_268": {
+            "solution": "library",
+            "llm_baseline": "house",
+            "llm_preprocessedReasoning": "house"
+        },
+        "sample_269": {
+            "solution": "slide",
+            "llm_baseline": "slide",
+            "llm_preprocessedReasoning": "slide"
+        },
+        "sample_270": {
+            "solution": "Ryan",
+            "llm_baseline": "Ryan",
+            "llm_preprocessedReasoning": "Michael"
+        },
+        "sample_271": {
+            "solution": "shop",
+            "llm_baseline": "shop",
+            "llm_preprocessedReasoning": "garage"
+        },
+        "sample_272": {
+            "solution": "pocket watch",
+            "llm_baseline": "pocket watch",
+            "llm_preprocessedReasoning": "pocket watch"
+        },
+        "sample_273": {
+            "solution": "sci-fi movies",
+            "llm_baseline": "sci-fi movies",
+            "llm_preprocessedReasoning": "sci-fi movies"
+        },
+        "sample_274": {
+            "solution": "Christine",
+            "llm_baseline": "Laura",
+            "llm_preprocessedReasoning": "Laura"
+        },
+        "sample_275": {
+            "solution": "bikini",
+            "llm_baseline": "top",
+            "llm_preprocessedReasoning": "top"
+        },
+        "sample_276": {
+            "solution": "top",
+            "llm_baseline": "top",
+            "llm_preprocessedReasoning": "top"
+        },
+        "sample_277": {
+            "solution": "Elena",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Elena"
+        },
+        "sample_278": {
+            "solution": "Angela",
+            "llm_baseline": "Mary",
+            "llm_preprocessedReasoning": "Mary"
+        },
+        "sample_279": {
+            "solution": "Betty",
+            "llm_baseline": "Betty",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_280": {
+            "solution": "Eric",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Eric"
+        },
+        "sample_281": {
+            "solution": "mango",
+            "llm_baseline": "cup",
+            "llm_preprocessedReasoning": "cup"
+        },
+        "sample_282": {
+            "solution": "pie",
+            "llm_baseline": "cookies",
+            "llm_preprocessedReasoning": "pie"
+        },
+        "sample_283": {
+            "solution": "Brian",
+            "llm_baseline": "Brian",
+            "llm_preprocessedReasoning": "Nick"
+        },
+        "sample_284": {
+            "solution": "clock",
+            "llm_baseline": "conversation",
+            "llm_preprocessedReasoning": "clock"
+        },
+        "sample_285": {
+            "solution": "Laura",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_286": {
+            "solution": "Nelson",
+            "llm_baseline": "Ryan",
+            "llm_preprocessedReasoning": "Ryan"
+        },
+        "sample_287": {
+            "solution": "Kenneth",
+            "llm_baseline": "Kenneth",
+            "llm_preprocessedReasoning": "Kenneth"
+        },
+        "sample_288": {
+            "solution": "Katrina",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Katrina"
+        },
+        "sample_289": {
+            "solution": "pen",
+            "llm_baseline": "pen",
+            "llm_preprocessedReasoning": "pen"
+        },
+        "sample_290": {
+            "solution": "Matthew",
+            "llm_baseline": "Logan",
+            "llm_preprocessedReasoning": "Matthew"
+        },
+        "sample_291": {
+            "solution": "Patricia",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Patricia"
+        },
+        "sample_292": {
+            "solution": "Victoria",
+            "llm_baseline": "Victoria",
+            "llm_preprocessedReasoning": "Victoria"
+        },
+        "sample_293": {
+            "solution": "dolls",
+            "llm_baseline": "dolls",
+            "llm_preprocessedReasoning": "dolls"
+        },
+        "sample_294": {
+            "solution": "bike",
+            "llm_baseline": "bike",
+            "llm_preprocessedReasoning": "car"
+        },
+        "sample_295": {
+            "solution": "car",
+            "llm_baseline": "car",
+            "llm_preprocessedReasoning": "car"
+        },
+        "sample_296": {
+            "solution": "Jeffrey",
+            "llm_baseline": "Michael",
+            "llm_preprocessedReasoning": "Jeffrey"
+        },
+        "sample_297": {
+            "solution": "Patricia",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_298": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_299": {
+            "solution": "Leslie",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Leslie"
+        },
+        "sample_300": {
+            "solution": "Jessica",
+            "llm_baseline": "Rachel",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_301": {
+            "solution": "Erin",
+            "llm_baseline": "Maria",
+            "llm_preprocessedReasoning": "Erin"
+        },
+        "sample_302": {
+            "solution": "Kenneth",
+            "llm_baseline": "Ian",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_303": {
+            "solution": "Christine",
+            "llm_baseline": "Tanya",
+            "llm_preprocessedReasoning": "Tanya"
+        },
+        "sample_304": {
+            "solution": "Derrick",
+            "llm_baseline": "Steven",
+            "llm_preprocessedReasoning": "Steven"
+        },
+        "sample_305": {
+            "solution": "Steven",
+            "llm_baseline": "Steven",
+            "llm_preprocessedReasoning": "Steven"
+        },
+        "sample_306": {
+            "solution": "Joel",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Eric"
+        },
+        "sample_307": {
+            "solution": "Kayla",
+            "llm_baseline": "Kayla",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_308": {
+            "solution": "Joseph",
+            "llm_baseline": "Joseph",
+            "llm_preprocessedReasoning": "Joseph"
+        },
+        "sample_309": {
+            "solution": "Hunter",
+            "llm_baseline": "Justin",
+            "llm_preprocessedReasoning": "Justin"
+        },
+        "sample_310": {
+            "solution": "mediation",
+            "llm_baseline": "medication",
+            "llm_preprocessedReasoning": "medication"
+        },
+        "sample_311": {
+            "solution": "Jason",
+            "llm_baseline": "Jason",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_312": {
+            "solution": "Benjamin",
+            "llm_baseline": "Jason",
+            "llm_preprocessedReasoning": "Jason"
+        },
+        "sample_313": {
+            "solution": "caramel",
+            "llm_baseline": "chocolate",
+            "llm_preprocessedReasoning": "caramel"
+        },
+        "sample_314": {
+            "solution": "chocolate",
+            "llm_baseline": "chocolate",
+            "llm_preprocessedReasoning": "chocolate"
+        },
+        "sample_315": {
+            "solution": "budget",
+            "llm_baseline": "budget",
+            "llm_preprocessedReasoning": "budget"
+        },
+        "sample_316": {
+            "solution": "meeting",
+            "llm_baseline": "meeting",
+            "llm_preprocessedReasoning": "meeting"
+        },
+        "sample_317": {
+            "solution": "sponges",
+            "llm_baseline": "sponges",
+            "llm_preprocessedReasoning": "sponges"
+        },
+        "sample_318": {
+            "solution": "Randy",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_319": {
+            "solution": "bedroom",
+            "llm_baseline": "bedroom",
+            "llm_preprocessedReasoning": "bedroom"
+        },
+        "sample_320": {
+            "solution": "bathroom",
+            "llm_baseline": "bedroom",
+            "llm_preprocessedReasoning": "bathroom"
+        },
+        "sample_321": {
+            "solution": "Michael",
+            "llm_baseline": "Michael",
+            "llm_preprocessedReasoning": "Kevin"
+        },
+        "sample_322": {
+            "solution": "Kevin",
+            "llm_baseline": "Kevin",
+            "llm_preprocessedReasoning": "Kevin"
+        },
+        "sample_323": {
+            "solution": "comb",
+            "llm_baseline": "hair",
+            "llm_preprocessedReasoning": "comb"
+        },
+        "sample_324": {
+            "solution": "Maria",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Maria"
+        },
+        "sample_325": {
+            "solution": "Cynthia",
+            "llm_baseline": "Maria",
+            "llm_preprocessedReasoning": "Cynthia"
+        },
+        "sample_326": {
+            "solution": "Hunter",
+            "llm_baseline": "Dennis",
+            "llm_preprocessedReasoning": "Dennis"
+        },
+        "sample_327": {
+            "solution": "Robert",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Jeffrey"
+        },
+        "sample_328": {
+            "solution": "Maria",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Maria"
+        },
+        "sample_329": {
+            "solution": "Nelson",
+            "llm_baseline": "Justin",
+            "llm_preprocessedReasoning": "Nelson"
+        },
+        "sample_330": {
+            "solution": "Justin",
+            "llm_baseline": "Nelson",
+            "llm_preprocessedReasoning": "Justin"
+        },
+        "sample_331": {
+            "solution": "Angela",
+            "llm_baseline": "Angela",
+            "llm_preprocessedReasoning": "Angela"
+        },
+        "sample_332": {
+            "solution": "Carrie",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_333": {
+            "solution": "Donald",
+            "llm_baseline": "Donald",
+            "llm_preprocessedReasoning": "Donald"
+        },
+        "sample_334": {
+            "solution": "Felicia",
+            "llm_baseline": "Felicia",
+            "llm_preprocessedReasoning": "Katrina"
+        },
+        "sample_335": {
+            "solution": "Katrina",
+            "llm_baseline": "Felicia",
+            "llm_preprocessedReasoning": "Felicia"
+        },
+        "sample_336": {
+            "solution": "Sarah",
+            "llm_baseline": "Sarah",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_337": {
+            "solution": "Nelson",
+            "llm_baseline": "Neil",
+            "llm_preprocessedReasoning": "Neil"
+        },
+        "sample_338": {
+            "solution": "Derrick",
+            "llm_baseline": "Derrick",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_339": {
+            "solution": "William",
+            "llm_baseline": "William",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_340": {
+            "solution": "inn",
+            "llm_baseline": "inn",
+            "llm_preprocessedReasoning": "inn"
+        },
+        "sample_341": {
+            "solution": "hotel",
+            "llm_baseline": "hotel",
+            "llm_preprocessedReasoning": "inn"
+        },
+        "sample_342": {
+            "solution": "interview",
+            "llm_baseline": "interview",
+            "llm_preprocessedReasoning": "interview"
+        },
+        "sample_343": {
+            "solution": "truck",
+            "llm_baseline": "car",
+            "llm_preprocessedReasoning": "truck"
+        },
+        "sample_344": {
+            "solution": "car",
+            "llm_baseline": "truck",
+            "llm_preprocessedReasoning": "truck"
+        },
+        "sample_345": {
+            "solution": "glasses",
+            "llm_baseline": "contacts",
+            "llm_preprocessedReasoning": "contacts"
+        },
+        "sample_346": {
+            "solution": "e-mail",
+            "llm_baseline": "letter",
+            "llm_preprocessedReasoning": "letter"
+        },
+        "sample_347": {
+            "solution": "tea",
+            "llm_baseline": "tea",
+            "llm_preprocessedReasoning": "tea"
+        },
+        "sample_348": {
+            "solution": "Jennifer",
+            "llm_baseline": "Jennifer",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_349": {
+            "solution": "Adam",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_350": {
+            "solution": "Cynthia",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Elena"
+        },
+        "sample_351": {
+            "solution": "Elena",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Cynthia"
+        },
+        "sample_352": {
+            "solution": "Kenneth",
+            "llm_baseline": "Kenneth",
+            "llm_preprocessedReasoning": "Kenneth"
+        },
+        "sample_353": {
+            "solution": "Eric",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Kevin"
+        },
+        "sample_354": {
+            "solution": "Mary",
+            "llm_baseline": "Jennifer",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_355": {
+            "solution": "Ryan",
+            "llm_baseline": "Donald",
+            "llm_preprocessedReasoning": "Donald"
+        },
+        "sample_356": {
+            "solution": "cake",
+            "llm_baseline": "cake",
+            "llm_preprocessedReasoning": "cake"
+        },
+        "sample_357": {
+            "solution": "Hunter",
+            "llm_baseline": "Hunter",
+            "llm_preprocessedReasoning": "Hunter"
+        },
+        "sample_358": {
+            "solution": "Craig",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Craig"
+        },
+        "sample_359": {
+            "solution": "Carrie",
+            "llm_baseline": "Laura",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_360": {
+            "solution": "Benjamin",
+            "llm_baseline": "Benjamin",
+            "llm_preprocessedReasoning": "Benjamin"
+        },
+        "sample_361": {
+            "solution": "oil",
+            "llm_baseline": "oil",
+            "llm_preprocessedReasoning": "oil"
+        },
+        "sample_362": {
+            "solution": "water",
+            "llm_baseline": "oil",
+            "llm_preprocessedReasoning": "oil"
+        },
+        "sample_363": {
+            "solution": "frame",
+            "llm_baseline": "frame",
+            "llm_preprocessedReasoning": "pole"
+        },
+        "sample_364": {
+            "solution": "pole",
+            "llm_baseline": "frame",
+            "llm_preprocessedReasoning": "pole"
+        },
+        "sample_365": {
+            "solution": "paper cups",
+            "llm_baseline": "styrofoam cups",
+            "llm_preprocessedReasoning": "styrofoam cups"
+        },
+        "sample_366": {
+            "solution": "Sarah",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_367": {
+            "solution": "Robert",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Robert"
+        },
+        "sample_368": {
+            "solution": "makeup",
+            "llm_baseline": "makeup",
+            "llm_preprocessedReasoning": "skin"
+        },
+        "sample_369": {
+            "solution": "Ian",
+            "llm_baseline": "Ian",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_370": {
+            "solution": "carrots",
+            "llm_baseline": "carrots",
+            "llm_preprocessedReasoning": "carrots"
+        },
+        "sample_371": {
+            "solution": "door",
+            "llm_baseline": "door",
+            "llm_preprocessedReasoning": "door"
+        },
+        "sample_372": {
+            "solution": "Erin",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Erin"
+        },
+        "sample_373": {
+            "solution": "Logan",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Robert"
+        },
+        "sample_374": {
+            "solution": "Betty",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Erin"
+        },
+        "sample_375": {
+            "solution": "Erin",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Betty"
+        },
+        "sample_376": {
+            "solution": "truck",
+            "llm_baseline": "car",
+            "llm_preprocessedReasoning": "car"
+        },
+        "sample_377": {
+            "solution": "car",
+            "llm_baseline": "car",
+            "llm_preprocessedReasoning": "truck"
+        },
+        "sample_378": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Jennifer"
+        },
+        "sample_379": {
+            "solution": "Ian",
+            "llm_baseline": "Ian",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_380": {
+            "solution": "Patricia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Patricia"
+        },
+        "sample_381": {
+            "solution": "hose",
+            "llm_baseline": "hose",
+            "llm_preprocessedReasoning": "hose"
+        },
+        "sample_382": {
+            "solution": "Amy",
+            "llm_baseline": "Amy",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_383": {
+            "solution": "washer",
+            "llm_baseline": "washer",
+            "llm_preprocessedReasoning": "dryer"
+        },
+        "sample_384": {
+            "solution": "cake",
+            "llm_baseline": "cake",
+            "llm_preprocessedReasoning": "cake"
+        },
+        "sample_385": {
+            "solution": "hole",
+            "llm_baseline": "hole",
+            "llm_preprocessedReasoning": "hole"
+        },
+        "sample_386": {
+            "solution": "pit",
+            "llm_baseline": "pit",
+            "llm_preprocessedReasoning": "pit"
+        },
+        "sample_387": {
+            "solution": "container",
+            "llm_baseline": "container",
+            "llm_preprocessedReasoning": "roller"
+        },
+        "sample_388": {
+            "solution": "city",
+            "llm_baseline": "city",
+            "llm_preprocessedReasoning": "city"
+        },
+        "sample_389": {
+            "solution": "refrigerator",
+            "llm_baseline": "refrigerator",
+            "llm_preprocessedReasoning": "part"
+        },
+        "sample_390": {
+            "solution": "Patricia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Patricia"
+        },
+        "sample_391": {
+            "solution": "Erin",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Erin"
+        },
+        "sample_392": {
+            "solution": "Kayla",
+            "llm_baseline": "Emily",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_393": {
+            "solution": "Tanya",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Tanya"
+        },
+        "sample_394": {
+            "solution": "closets",
+            "llm_baseline": "closets",
+            "llm_preprocessedReasoning": "clothes"
+        },
+        "sample_395": {
+            "solution": "Benjamin",
+            "llm_baseline": "Benjamin",
+            "llm_preprocessedReasoning": "Benjamin"
+        },
+        "sample_396": {
+            "solution": "Neil",
+            "llm_baseline": "Jeffrey",
+            "llm_preprocessedReasoning": "Jeffrey"
+        },
+        "sample_397": {
+            "solution": "gifts",
+            "llm_baseline": "dishes",
+            "llm_preprocessedReasoning": "dishes"
+        },
+        "sample_398": {
+            "solution": "Megan",
+            "llm_baseline": "Megan",
+            "llm_preprocessedReasoning": "Megan"
+        },
+        "sample_399": {
+            "solution": "Craig",
+            "llm_baseline": "Craig",
+            "llm_preprocessedReasoning": "Craig"
+        },
+        "sample_400": {
+            "solution": "Dennis",
+            "llm_baseline": "Ian",
+            "llm_preprocessedReasoning": "Dennis"
+        },
+        "sample_401": {
+            "solution": "clothes",
+            "llm_baseline": "clothes",
+            "llm_preprocessedReasoning": "clothes"
+        },
+        "sample_402": {
+            "solution": "walls",
+            "llm_baseline": "walls",
+            "llm_preprocessedReasoning": "clothes"
+        },
+        "sample_403": {
+            "solution": "Maria",
+            "llm_baseline": "Maria",
+            "llm_preprocessedReasoning": "Natalie"
+        },
+        "sample_404": {
+            "solution": "Natalie",
+            "llm_baseline": "Maria",
+            "llm_preprocessedReasoning": "Natalie"
+        },
+        "sample_405": {
+            "solution": "Adam",
+            "llm_baseline": "Hunter",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_406": {
+            "solution": "Felicia",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_407": {
+            "solution": "Felicia",
+            "llm_baseline": "Felicia",
+            "llm_preprocessedReasoning": "Felicia"
+        },
+        "sample_408": {
+            "solution": "water",
+            "llm_baseline": "foot",
+            "llm_preprocessedReasoning": "foot"
+        },
+        "sample_409": {
+            "solution": "Adam",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Benjamin"
+        },
+        "sample_410": {
+            "solution": "Benjamin",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Adam"
+        },
+        "sample_411": {
+            "solution": "Erin",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Erin"
+        },
+        "sample_412": {
+            "solution": "hand",
+            "llm_baseline": "hand",
+            "llm_preprocessedReasoning": "hand"
+        },
+        "sample_413": {
+            "solution": "glove",
+            "llm_baseline": "glove",
+            "llm_preprocessedReasoning": "glove"
+        },
+        "sample_414": {
+            "solution": "steel",
+            "llm_baseline": "foundation",
+            "llm_preprocessedReasoning": "foundation"
+        },
+        "sample_415": {
+            "solution": "water bottles",
+            "llm_baseline": "water bottles",
+            "llm_preprocessedReasoning": "water bottles"
+        },
+        "sample_416": {
+            "solution": "snacks",
+            "llm_baseline": "snacks",
+            "llm_preprocessedReasoning": "snacks"
+        },
+        "sample_417": {
+            "solution": "magazine",
+            "llm_baseline": "magazine",
+            "llm_preprocessedReasoning": "magazine"
+        },
+        "sample_418": {
+            "solution": "Tanya",
+            "llm_baseline": "Tanya",
+            "llm_preprocessedReasoning": "Tanya"
+        },
+        "sample_419": {
+            "solution": "recycling",
+            "llm_baseline": "recycling",
+            "llm_preprocessedReasoning": "recycling"
+        },
+        "sample_420": {
+            "solution": "burn",
+            "llm_baseline": "pain",
+            "llm_preprocessedReasoning": "burn"
+        },
+        "sample_421": {
+            "solution": "restaurant",
+            "llm_baseline": "restaurant",
+            "llm_preprocessedReasoning": "restaurant"
+        },
+        "sample_422": {
+            "solution": "Kyle",
+            "llm_baseline": "Eric",
+            "llm_preprocessedReasoning": "Kyle"
+        },
+        "sample_423": {
+            "solution": "Cynthia",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Sarah"
+        },
+        "sample_424": {
+            "solution": "sticker",
+            "llm_baseline": "sticker",
+            "llm_preprocessedReasoning": "sticker"
+        },
+        "sample_425": {
+            "solution": "cream",
+            "llm_baseline": "cream",
+            "llm_preprocessedReasoning": "lotion"
+        },
+        "sample_426": {
+            "solution": "Jeffrey",
+            "llm_baseline": "Jeffrey",
+            "llm_preprocessedReasoning": "Jeffrey"
+        },
+        "sample_427": {
+            "solution": "Kenneth",
+            "llm_baseline": "Jeffrey",
+            "llm_preprocessedReasoning": "Jeffrey"
+        },
+        "sample_428": {
+            "solution": "Michael",
+            "llm_baseline": "Adam",
+            "llm_preprocessedReasoning": "Michael"
+        },
+        "sample_429": {
+            "solution": "pot",
+            "llm_baseline": "pot",
+            "llm_preprocessedReasoning": "pot"
+        },
+        "sample_430": {
+            "solution": "glass",
+            "llm_baseline": "pot",
+            "llm_preprocessedReasoning": "pot"
+        },
+        "sample_431": {
+            "solution": "ball",
+            "llm_baseline": "ball",
+            "llm_preprocessedReasoning": "ball"
+        },
+        "sample_432": {
+            "solution": "plant",
+            "llm_baseline": "garden",
+            "llm_preprocessedReasoning": "garden"
+        },
+        "sample_433": {
+            "solution": "Amy",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Amy"
+        },
+        "sample_434": {
+            "solution": "William",
+            "llm_baseline": "William",
+            "llm_preprocessedReasoning": "William"
+        },
+        "sample_435": {
+            "solution": "Jessica",
+            "llm_baseline": "Angela",
+            "llm_preprocessedReasoning": "Jessica"
+        },
+        "sample_436": {
+            "solution": "Monica",
+            "llm_baseline": "Katrina",
+            "llm_preprocessedReasoning": "Monica"
+        },
+        "sample_437": {
+            "solution": "beaches",
+            "llm_baseline": "highlands",
+            "llm_preprocessedReasoning": "beaches"
+        },
+        "sample_438": {
+            "solution": "Cynthia",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Cynthia"
+        },
+        "sample_439": {
+            "solution": "Jessica",
+            "llm_baseline": "Jessica",
+            "llm_preprocessedReasoning": "Christine"
+        },
+        "sample_440": {
+            "solution": "Kevin",
+            "llm_baseline": "Joel",
+            "llm_preprocessedReasoning": "Joel"
+        },
+        "sample_441": {
+            "solution": "Cynthia",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Monica"
+        },
+        "sample_442": {
+            "solution": "Monica",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Cynthia"
+        },
+        "sample_443": {
+            "solution": "Christine",
+            "llm_baseline": "Christine",
+            "llm_preprocessedReasoning": "Christine"
+        },
+        "sample_444": {
+            "solution": "Hunter",
+            "llm_baseline": "Samuel",
+            "llm_preprocessedReasoning": "Hunter"
+        },
+        "sample_445": {
+            "solution": "air",
+            "llm_baseline": "bedroom",
+            "llm_preprocessedReasoning": "air"
+        },
+        "sample_446": {
+            "solution": "Ian",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Robert"
+        },
+        "sample_447": {
+            "solution": "ball",
+            "llm_baseline": "ball",
+            "llm_preprocessedReasoning": "ditch"
+        },
+        "sample_448": {
+            "solution": "catering",
+            "llm_baseline": "catering",
+            "llm_preprocessedReasoning": "catering"
+        },
+        "sample_449": {
+            "solution": "food wholesale",
+            "llm_baseline": "wholesale",
+            "llm_preprocessedReasoning": "catering"
+        },
+        "sample_450": {
+            "solution": "Monica",
+            "llm_baseline": "Monica",
+            "llm_preprocessedReasoning": "Monica"
+        },
+        "sample_451": {
+            "solution": "cleaner",
+            "llm_baseline": "cleaner",
+            "llm_preprocessedReasoning": "cleaner"
+        },
+        "sample_452": {
+            "solution": "Christopher",
+            "llm_baseline": "Christopher",
+            "llm_preprocessedReasoning": "Christopher"
+        },
+        "sample_453": {
+            "solution": "Watch",
+            "llm_baseline": "The answer: Blade.",
+            "llm_preprocessedReasoning": "Blade"
+        },
+        "sample_454": {
+            "solution": "Lawrence",
+            "llm_baseline": "Randy",
+            "llm_preprocessedReasoning": "Randy"
+        },
+        "sample_455": {
+            "solution": "shoes",
+            "llm_baseline": "shoes",
+            "llm_preprocessedReasoning": "shoes"
+        },
+        "sample_456": {
+            "solution": "chairs",
+            "llm_baseline": "chairs",
+            "llm_preprocessedReasoning": "chairs"
+        },
+        "sample_457": {
+            "solution": "hot",
+            "llm_baseline": "iced",
+            "llm_preprocessedReasoning": "iced"
+        },
+        "sample_458": {
+            "solution": "iced",
+            "llm_baseline": "iced",
+            "llm_preprocessedReasoning": "iced"
+        },
+        "sample_459": {
+            "solution": "Samantha",
+            "llm_baseline": "Samantha",
+            "llm_preprocessedReasoning": "Samantha"
+        },
+        "sample_460": {
+            "solution": "bag",
+            "llm_baseline": "pocket",
+            "llm_preprocessedReasoning": "pocket"
+        },
+        "sample_461": {
+            "solution": "pocket",
+            "llm_baseline": "bag",
+            "llm_preprocessedReasoning": "pocket"
+        },
+        "sample_462": {
+            "solution": "Cynthia",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Cynthia"
+        },
+        "sample_463": {
+            "solution": "mansion",
+            "llm_baseline": "mansion",
+            "llm_preprocessedReasoning": "house"
+        },
+        "sample_464": {
+            "solution": "William",
+            "llm_baseline": "William",
+            "llm_preprocessedReasoning": "Kevin"
+        },
+        "sample_465": {
+            "solution": "billboard",
+            "llm_baseline": "billboard",
+            "llm_preprocessedReasoning": "billboard"
+        },
+        "sample_466": {
+            "solution": "sign",
+            "llm_baseline": "sign",
+            "llm_preprocessedReasoning": "sign"
+        },
+        "sample_467": {
+            "solution": "Justin",
+            "llm_baseline": "Justin",
+            "llm_preprocessedReasoning": "Justin"
+        },
+        "sample_468": {
+            "solution": "Elena",
+            "llm_baseline": "Elena",
+            "llm_preprocessedReasoning": "Elena"
+        },
+        "sample_469": {
+            "solution": "Ian",
+            "llm_baseline": "Joel",
+            "llm_preprocessedReasoning": "Ian"
+        },
+        "sample_470": {
+            "solution": "dresser",
+            "llm_baseline": "dresser",
+            "llm_preprocessedReasoning": "dresser"
+        },
+        "sample_471": {
+            "solution": "fan",
+            "llm_baseline": "fan",
+            "llm_preprocessedReasoning": "dresser"
+        },
+        "sample_472": {
+            "solution": "pad",
+            "llm_baseline": "pad",
+            "llm_preprocessedReasoning": "ice"
+        },
+        "sample_473": {
+            "solution": "ice",
+            "llm_baseline": "ice",
+            "llm_preprocessedReasoning": "ice"
+        },
+        "sample_474": {
+            "solution": "Kayla",
+            "llm_baseline": "Erin",
+            "llm_preprocessedReasoning": "Kayla"
+        },
+        "sample_475": {
+            "solution": "Kyle",
+            "llm_baseline": "Kyle",
+            "llm_preprocessedReasoning": "Kyle"
+        },
+        "sample_476": {
+            "solution": "Christopher",
+            "llm_baseline": "Christopher",
+            "llm_preprocessedReasoning": "Hunter"
+        },
+        "sample_477": {
+            "solution": "Carrie",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Patricia"
+        },
+        "sample_478": {
+            "solution": "house",
+            "llm_baseline": "house",
+            "llm_preprocessedReasoning": "house"
+        },
+        "sample_479": {
+            "solution": "Instrument",
+            "llm_baseline": "Instrument",
+            "llm_preprocessedReasoning": "Instrument"
+        },
+        "sample_480": {
+            "solution": "Kenneth",
+            "llm_baseline": "Michael",
+            "llm_preprocessedReasoning": "Kenneth"
+        },
+        "sample_481": {
+            "solution": "communication",
+            "llm_baseline": "communication",
+            "llm_preprocessedReasoning": "communication"
+        },
+        "sample_482": {
+            "solution": "camera",
+            "llm_baseline": "camera",
+            "llm_preprocessedReasoning": "camera"
+        },
+        "sample_483": {
+            "solution": "tripod",
+            "llm_baseline": "camera",
+            "llm_preprocessedReasoning": "camera"
+        },
+        "sample_484": {
+            "solution": "kitchen",
+            "llm_baseline": "kitchen",
+            "llm_preprocessedReasoning": "bedroom"
+        },
+        "sample_485": {
+            "solution": "bedroom",
+            "llm_baseline": "kitchen",
+            "llm_preprocessedReasoning": "kitchen"
+        },
+        "sample_486": {
+            "solution": "Maria",
+            "llm_baseline": "Maria",
+            "llm_preprocessedReasoning": "Samantha"
+        },
+        "sample_487": {
+            "solution": "Amy",
+            "llm_baseline": "Lindsey",
+            "llm_preprocessedReasoning": "Lindsey"
+        },
+        "sample_488": {
+            "solution": "party",
+            "llm_baseline": "party",
+            "llm_preprocessedReasoning": "party"
+        },
+        "sample_489": {
+            "solution": "Betty",
+            "llm_baseline": "Betty",
+            "llm_preprocessedReasoning": "Betty"
+        },
+        "sample_490": {
+            "solution": "Cynthia",
+            "llm_baseline": "Betty",
+            "llm_preprocessedReasoning": "Betty"
+        },
+        "sample_491": {
+            "solution": "remote control",
+            "llm_baseline": "remote control",
+            "llm_preprocessedReasoning": "remote control"
+        },
+        "sample_492": {
+            "solution": "Natalie",
+            "llm_baseline": "Natalie",
+            "llm_preprocessedReasoning": "Natalie"
+        },
+        "sample_493": {
+            "solution": "Joel",
+            "llm_baseline": "Robert",
+            "llm_preprocessedReasoning": "Joel"
+        },
+        "sample_494": {
+            "solution": "Aaron",
+            "llm_baseline": "Aaron",
+            "llm_preprocessedReasoning": "Aaron"
+        },
+        "sample_495": {
+            "solution": "Christopher",
+            "llm_baseline": "Christopher",
+            "llm_preprocessedReasoning": "Christopher"
+        },
+        "sample_496": {
+            "solution": "Carrie",
+            "llm_baseline": "Carrie",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_497": {
+            "solution": "Samantha",
+            "llm_baseline": "Samantha",
+            "llm_preprocessedReasoning": "Carrie"
+        },
+        "sample_498": {
+            "solution": "Patricia",
+            "llm_baseline": "Patricia",
+            "llm_preprocessedReasoning": "Patricia"
+        },
+        "sample_499": {
+            "solution": "Cynthia",
+            "llm_baseline": "Cynthia",
+            "llm_preprocessedReasoning": "Carrie"
+        }
+    }
+}
