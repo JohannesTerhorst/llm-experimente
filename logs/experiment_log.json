@@ -62,5 +62,37 @@
                 "output_tokens": 20
             }
         ]
+    },
+    {
+        "timestamp": "2026-04-23T15:28:32.295814",
+        "model": "qwen2.5:3b",
+        "context": "Exactly six trade representatives negotiate a treaty: Klosnik, Londi, Manley, Neri, Osata, Poirier. There are exactly six chairs evenly spaced around a circular table. The chairs are numbered 1 through 6, with successively numbered chairs next to each other and chair number 1 next to chair number 6. Each chair is occupied by exactly one of the representatives. The following conditions apply: Poirier sits immediately next to Neri. Londi sits immediately next to Manley, Neri, or both. Klosnik does not sit immediately next to Manley. If Osata sits immediately next to Poirier, Osata does not sit immediately next to Manley.",
+        "question": "Generate exactly one valid seating arrangement of the six representatives in chairs 1 through 6 that does NOT violate the stated conditions.",
+        "steps": [
+            {
+                "step_name": "Step 0: Baseline",
+                "prompt": "Task: Solve the logic puzzle based on the context. You must ONLY output the final seating arrangement as a comma-separated list of the 6 names. Do NOT provide any explanations or reasoning.\nContext: Exactly six trade representatives negotiate a treaty: Klosnik, Londi, Manley, Neri, Osata, Poirier. There are exactly six chairs evenly spaced around a circular table. The chairs are numbered 1 through 6, with successively numbered chairs next to each other and chair number 1 next to chair number 6. Each chair is occupied by exactly one of the representatives. The following conditions apply: Poirier sits immediately next to Neri. Londi sits immediately next to Manley, Neri, or both. Klosnik does not sit immediately next to Manley. If Osata sits immediately next to Poirier, Osata does not sit immediately next to Manley.\nQuestion: Generate exactly one valid seating arrangement of the six representatives in chairs 1 through 6 that does NOT violate the stated conditions.\nTask: ONLY output the sequence. Example format: Name1, Name2, Name3, Name4, Name5, Name6",
+                "output": "",
+                "latency_seconds": 54.74,
+                "input_tokens": 251,
+                "output_tokens": 50
+            },
+            {
+                "step_name": "Step 1: Reasoning Generation",
+                "prompt": "Task: Think step-by-step to solve the logic puzzle. Generate a concise logical deduction path. Limit your reasoning to a maximum of 300 words.\nContext: Exactly six trade representatives negotiate a treaty: Klosnik, Londi, Manley, Neri, Osata, Poirier. There are exactly six chairs evenly spaced around a circular table. The chairs are numbered 1 through 6, with successively numbered chairs next to each other and chair number 1 next to chair number 6. Each chair is occupied by exactly one of the representatives. The following conditions apply: Poirier sits immediately next to Neri. Londi sits immediately next to Manley, Neri, or both. Klosnik does not sit immediately next to Manley. If Osata sits immediately next to Poirier, Osata does not sit immediately next to Manley.\nQuestion: Generate exactly one valid seating arrangement of the six representatives in chairs 1 through 6 that does NOT violate the stated conditions.\nTask: Provide your concise step-by-step logical deduction. Do not output the final list yet, only the logical steps.",
+                "output": "",
+                "latency_seconds": 124.44,
+                "input_tokens": 242,
+                "output_tokens": 300
+            },
+            {
+                "step_name": "Step 2: Synthesis",
+                "prompt": "Task: Solve the logic puzzle using the provided thought process. You must ONLY output the final seating arrangement as a comma-separated list of the 6 names. Do NOT provide any explanations.\nContext: Exactly six trade representatives negotiate a treaty: Klosnik, Londi, Manley, Neri, Osata, Poirier. There are exactly six chairs evenly spaced around a circular table. The chairs are numbered 1 through 6, with successively numbered chairs next to each other and chair number 1 next to chair number 6. Each chair is occupied by exactly one of the representatives. The following conditions apply: Poirier sits immediately next to Neri. Londi sits immediately next to Manley, Neri, or both. Klosnik does not sit immediately next to Manley. If Osata sits immediately next to Poirier, Osata does not sit immediately next to Manley.\nQuestion: Generate exactly one valid seating arrangement of the six representatives in chairs 1 through 6 that does NOT violate the stated conditions.\nTask: Review the following thought process.\nThought Process: \nQuestion: Generate exactly one valid seating arrangement of the six representatives in chairs 1 through 6 that does NOT violate the stated conditions.\nTask: Based on the thought process, ONLY output the final sequence. Example format: Name1, Name2, Name3, Name4, Name5, Name6",
+                "output": "",
+                "latency_seconds": 48.68,
+                "input_tokens": 298,
+                "output_tokens": 50
+            }
+        ]
     }
 ]
