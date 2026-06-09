@@ -1,0 +1,377 @@
+% ============================================================
+%  Section 3 – Method
+%  Section 4 – Experimental Apparatus
+%  Draft — Think Twice: Does Repeating Reasoning Summaries
+%           Increase Chain-of-Thought Efficiency?
+% ============================================================
+
+% --------------------------------------------------
+\section{Method}
+\label{sec:method}
+
+\subsection{Task Formulation}
+\label{subsec:task}
+
+Let $\mathcal{D} = \{(x_i, y_i^*)\}_{i=1}^{N}$ be a dataset of problems $x_i$ paired with
+ground-truth answers $y_i^*$, and let $s_i$ denote a pre-computed, abstract reasoning skill
+associated with $x_i$.
+We define a \emph{prompt constructor} $\phi : (\mathcal{S}^k, \mathcal{X}) \to \mathcal{P}$
+that assembles an input sequence from $k \geq 0$ copies of a context string and the problem:
+\begin{equation}
+  \phi(c, k, x) = \underbrace{c \| c \| \cdots \| c}_{k\text{ copies}} \| x,
+  \label{eq:phi}
+\end{equation}
+where $\|$ denotes string concatenation and $c$ is one of three possible context objects (see
+below).  For $k = 0$ we recover the direct prompting baseline $\phi(\cdot, 0, x) = x$.
+
+\paragraph{Experimental conditions.}
+We define four prompt conditions that are matched on copy count $k$:
+
+\begin{itemize}
+  \item \textbf{Direct (D)}: Input $= x$.  No injected context.  This is the zero-shot baseline.
+  \item \textbf{Summary Repetition (\(\mathrm{SR}_k\))}: Input $= \phi(s, k, x)$.
+        The pre-computed skill text $s$ is prepended $k$ times before the problem.
+        At $k{=}1$ this reduces to the single-insight injection of I2S
+        \cite{wang2025harm}, establishing a clean entry point.
+  \item \textbf{Prompt Repetition (\(\mathrm{PR}_k\))}: Input $= \phi(x, k, x)$, i.e.\ the
+        problem statement itself repeated $k{+}1$ times.
+        This replicates the best-performing setting of \citet{leviathan2025prompt}
+        at $k{=}1$ and extends it to higher counts.
+  \item \textbf{Raw Reasoning Transfer (\(\mathrm{RT}_k\))}: Input $= \phi(\tau, k, x)$,
+        where $\tau$ is a full model-generated reasoning trace for a closely related problem,
+        frozen before the sweep begins.
+        This instantiates the harmful few-shot baseline identified in \citet{wang2025harm}.
+\end{itemize}
+
+\paragraph{Repetition count sweep.}
+We vary $k \in \{1, 2, 3, 4, 5\}$ for all injected conditions
+(SR, PR, RT), yielding a dense curve of 5 points per condition.
+The range is motivated as follows.
+$k{=}1$ corresponds to the I2S single-copy baseline \cite{wang2025harm} and to the
+standard prompt repetition of \citet{leviathan2025prompt}.
+$k{=}2$ matches the primary condition reported by \citeauthor{leviathan2025prompt},
+who found it optimal for non-reasoning models on most benchmarks.
+$k{=}3$ was also evaluated by \citeauthor{leviathan2025prompt} and shown to
+occasionally outperform $k{=}2$, particularly on tasks with high positional sensitivity.
+$k \in \{4, 5\}$ extends beyond the previously studied range to probe
+the \emph{cognitive overload} regime, where extraneous context is expected
+to exceed the model's effective working memory and degrade performance,
+consistent with Cognitive Load Theory as applied to transformer positional encodings
+in recent architectural analyses.
+Together, the five points map the full accuracy-versus-repetition curve and allow us to
+identify whether a performance peak exists before degradation sets in.
+
+\paragraph{Abstraction levels of the skill text.}
+The content of the injected skill $s$ is not uniform: following the taxonomy of
+\citet{didolkar2025metacognitive}, who distinguish behaviors by their level of
+procedural specificity, we test three abstraction levels drawn from the skill texts
+available in our dataset:
+
+\begin{enumerate}
+  \item \textbf{Strategy Steps (SR-Steps)}: A numbered sequence of procedural steps
+        specific to the problem type (e.g.\ ``Step 1: identify the variable.
+        Step 2: isolate it algebraically\ldots'').
+        This is the richest, most concrete level.
+  \item \textbf{Meta-Cognitive Hint (SR-Hint)}: A single-sentence strategic pointer
+        without procedural detail (e.g.\ ``Use proportional reasoning to relate the
+        given quantities''). This matches the concise \emph{behavior name + instruction}
+        format of \citet{didolkar2025metacognitive}.
+  \item \textbf{Structure Template (SR-Template)}: An abstract schema of the solution
+        form with placeholder variables (e.g.\ ``If $A$ relates to $B$ by ratio $r$,
+        then $C = r \cdot B$'').
+        This is the most abstract level, testing whether structural pattern transfer
+        alone is sufficient.
+\end{enumerate}
+
+Comparing these levels allows us to separate \emph{how much semantic content} the
+repeated object must carry to be effective, independently of the repetition count $k$.
+
+\subsection{Architecture Design \& Context Positioning}
+\label{subsec:architecture}
+
+\paragraph{Prompt injection.}
+All injected context is inserted as part of the user turn in the model's chat template,
+before the instruction to answer the question.
+No system-prompt manipulation is performed; the model's default system prompt is retained
+across all conditions to avoid confounding positional effects with system-prompt effects.
+
+\paragraph{Context position variants.}
+The position of the repeated context within the prompt is itself an experimental variable.
+We test three placements:
+
+\begin{enumerate}
+  \item \textbf{Pre-problem} (primary): $[\mathrm{context}^k]\ [x]$ — the skill text or
+        repeated query precedes the problem statement.
+        Based on the finding that causal attention in autoregressive models is
+        asymmetric — later tokens attend to earlier ones but not vice versa — placing
+        context early ensures maximum downstream attention coverage.
+  \item \textbf{Post-problem}: $[x]\ [\mathrm{context}^k]$ — the context follows the
+        problem.  This tests whether summary information placed after the problem
+        still influences generation, and is used as a control for the \emph{Lost in
+        the Middle} effect \cite{liu2023lost}, which predicts a performance dip for
+        information placed in the center of a long sequence.
+  \item \textbf{Within thinking tokens} (reasoning models only): the skill text is
+        injected as a preamble inside the explicit \texttt{<think>} block provided
+        to the model, simulating a \emph{warm-started} reasoning trace.
+        This placement is only applicable in the thinking-enabled mode of Qwen3-4B
+        and tests whether procedural context inserted directly into the reasoning
+        scratchpad reduces subsequent deliberation tokens more effectively than
+        prompt-level injection.
+\end{enumerate}
+
+The pre-problem placement is used as the default for all main results; the post-problem
+and within-thinking variants are evaluated in the ablation study
+(Section~\ref{subsec:ablation}).
+
+\subsection{Training \& Evaluation Objective}
+\label{subsec:objective}
+
+No model parameters are updated at any point.
+All interventions are purely prompt-level.
+We define a simple evaluation objective over a held-out subset of $\mathcal{D}$:
+\begin{equation}
+  \mathcal{L} = \mathbb{E}_{x \sim \mathcal{D}} \left[ \ell\!\left(f_\theta(x), y^*\right) \right],
+  \label{eq:objective}
+\end{equation}
+where $f_\theta$ is the frozen language model, $x$ is the fully assembled prompt for a
+given condition and copy count, and $\ell$ is the task-specific loss (exact-match accuracy
+for math problems; see Section~\ref{subsec:metrics} for details).
+Token efficiency is measured as a secondary objective: for each inference call we record
+the number of tokens generated inside the \texttt{<think>} block and the total output
+length, providing a cost-accuracy trade-off curve as a function of $k$.
+
+% --------------------------------------------------
+\section{Experimental Apparatus}
+\label{sec:apparatus}
+
+\subsection{Datasets}
+\label{subsec:datasets}
+
+\paragraph{Primary dataset — TRS Reasoning-Skill.}
+Our primary dataset is the \texttt{stallone0000/Reasoning-Skill} collection on HuggingFace,
+which provides (problem, answer, skill\_text) triples for mathematical reasoning tasks.
+This dataset was specifically chosen to \emph{isolate the repetition effect from the
+insight-acquisition effect}: because skill texts are pre-computed and bundled with each
+problem, no auxiliary retriever or skill-extraction model is introduced.
+Any such auxiliary component would act as a confound, entangling the quality of the
+extracted insight with the effect of its repetition.
+The math domain also provides objective, binary evaluation (exact-match correctness)
+and aligns with the benchmarks used in related work
+\cite{leviathan2025prompt, wang2025harm, didolkar2025metacognitive}.
+
+\paragraph{Secondary datasets — generalization benchmarks.}
+To assess whether findings generalise beyond mathematical reasoning, we additionally
+evaluate on three complementary benchmarks:
+
+\begin{itemize}
+  \item \textbf{GSM8K} \cite{cobbe2021gsm8k} / \textbf{MATH} \cite{hendrycks2021math}:
+        Standard mathematical reasoning benchmarks used in both
+        \citet{leviathan2025prompt} and \citet{wang2025harm}, enabling direct
+        comparison with reported results.
+  \item \textbf{BBH — Penguins in a Table} and \textbf{BBH — Disambiguation QA}
+        \cite{suzgun2022bbh}: Two BIG-Bench Hard subsets that probe tabular
+        reasoning and reference disambiguation respectively.
+        These tasks are chosen because they require distinct reasoning strategies,
+        testing whether the skill-repetition effect transfers across problem types.
+  \item \textbf{ProofWriter} \cite{tafjord2021proofwriter}: A logical deduction
+        benchmark in which skill texts (inference rules) are naturally structured
+        and available, making it well-suited to the SR-Template abstraction level.
+\end{itemize}
+
+\subsection{Preprocessing}
+\label{subsec:preprocessing}
+
+\paragraph{Skill text extraction.}
+For each problem in the evaluation split we retrieve the corresponding
+\texttt{skill\_text} field from the TRS dataset and use it directly as $s$ in
+the SR conditions.
+No further processing is applied to the TRS skill texts, preserving the three
+abstraction levels described in Section~\ref{subsec:task} as they appear in
+the dataset.
+
+\paragraph{Raw reasoning trace generation.}
+For the RT conditions, we generate one reasoning trace per problem by querying
+Qwen3-4B with thinking enabled and no injected context.
+The full content of the \texttt{<think>}\ldots\texttt{</think>} block is extracted
+programmatically and stored as $\tau$.
+These traces are generated once and frozen before any experimental sweep begins,
+ensuring that RT traces are not confounded by the model's own adaptation over the course
+of the experiment.
+
+\paragraph{Tokenisation and length accounting.}
+All token counts are obtained from the model's own generation metadata
+(thinking tokens and answer tokens are reported separately by the Qwen3-4B API).
+We report \emph{total generated tokens} (thinking + answer) as the primary efficiency
+metric, since this reflects the actual inference cost, not only the visible output
+\cite{leviathan2025prompt}.
+
+\subsection{Procedure \& Baselines}
+\label{subsec:procedure}
+
+\paragraph{Model variants.}
+Our primary controlled comparison uses a single model in two operating modes:
+\begin{itemize}
+  \item \textbf{Qwen3-4B / thinking on} (\textsc{Qwen-Think}):
+        Reasoning model; generates an explicit chain of thought inside
+        \texttt{<think>} tags before the final answer.
+  \item \textbf{Qwen3-4B / thinking off} (\textsc{Qwen-NoThink}):
+        Non-reasoning model; produces a direct answer without a scratchpad.
+        This mirrors the non-reasoning setting in \citet{leviathan2025prompt},
+        where prompt repetition was found most beneficial.
+\end{itemize}
+Using the same weights in both modes eliminates model capacity as a confound between
+reasoning and non-reasoning comparisons.
+A \textbf{second model family} (TBD; candidate: Gemma~3 or Llama~3) is included
+to distinguish Qwen-specific behavior from more general effects, as called for in the
+contributions of the paper.
+
+\paragraph{Experimental conditions matrix.}
+For each dataset, each model variant, and each condition
+$c \in \{\mathrm{D}, \mathrm{SR}_k, \mathrm{PR}_k, \mathrm{RT}_k\}$
+with $k \in \{1, 2, 3, 4, 5\}$, we run the model on all problems in the evaluation split.
+The full matrix is:
+$2\ \text{model modes} \times 5\ \text{conditions} \times 5\ \text{copy counts}
+= 50\ \text{configurations}$,
+plus the single Direct baseline per model mode.
+
+\paragraph{Noise ablation baselines.}
+To isolate whether performance changes stem from the \emph{content} of the injected
+text rather than its mere token-length increase, we include two length-matched noise
+conditions at each $k$:
+
+\begin{itemize}
+  \item \textbf{Filler ($\mathrm{Fill}_k$)}: The context is replaced by a sequence
+        of period characters padded to the same token count as $\mathrm{SR}_k$.
+        This replicates the \emph{Padding} control of \citet{leviathan2025prompt},
+        who confirmed that padding does not improve performance, and is consistent
+        with the mechanistic prediction of \citet{shi2025meaningless} that even
+        meaningless tokens can induce activation redistribution.
+        Any improvement of SR over Fill is therefore attributable to semantic content.
+  \item \textbf{Irrelevant Reasoning ($\mathrm{IRel}_k$)}: The context is a
+        reasoning trace drawn from a problem in a \emph{different domain}
+        (e.g.\ a logical-deduction trace injected before a math problem),
+        token-count matched to $\mathrm{RT}_k$.
+        This tests whether domain-matched content is necessary, or whether any
+        plausible-looking reasoning text provides the same benefit.
+\end{itemize}
+
+\paragraph{Statistical validity.}
+All conditions are run with 3 independent random seeds (controlling prompt-order
+shuffling and any stochastic decoding). We report mean accuracy and mean token counts
+together with standard deviations. Statistical significance between conditions at
+matched $k$ is assessed with a paired McNemar test \cite{mcnemar1947} at
+$p < 0.1$, following \citet{leviathan2025prompt}.
+
+\subsection{Metrics}
+\label{subsec:metrics}
+
+\begin{itemize}
+  \item \textbf{Accuracy}: For math tasks (TRS, GSM8K, MATH), exact-match
+        correctness of the final numerical answer, extracted by stripping formatting.
+        For BBH and ProofWriter, we follow the standard evaluation protocol of
+        each benchmark \cite{suzgun2022bbh, tafjord2021proofwriter}.
+  \item \textbf{Thinking token count} ($T_\mathrm{think}$): The number of tokens
+        generated inside the \texttt{<think>} block (applicable only to
+        \textsc{Qwen-Think}).
+        A reduction in $T_\mathrm{think}$ signals that the injected context
+        displaced some deliberation, consistent with the token-saving hypothesis.
+  \item \textbf{Total generated token count} ($T_\mathrm{total}$): Thinking tokens
+        plus answer tokens.  This is the primary efficiency metric because it
+        captures the full inference cost, including hidden reasoning, rather than
+        only the visible output \cite{leviathan2025prompt}.
+  \item \textbf{Accuracy–efficiency trade-off}: Accuracy plotted against
+        $T_\mathrm{total}$ across values of $k$ for each condition,
+        to identify whether any configuration simultaneously improves accuracy
+        and reduces generated tokens.
+\end{itemize}
+
+\subsection{Main Results}
+\label{subsec:main-results}
+
+% TODO: populate after experiments are complete.
+% Key comparisons to report:
+%   SR_k vs. D       → net effect of injected summary repetition
+%   SR_k vs. PR_k    → semantic value of summary over mechanical repetition
+%   SR_k vs. RT_k    → value of distillation (abstract vs. raw trace)
+%   SR_k(k=1) vs. SR_k(k>1) → pure stacking effect within summary condition
+%   Qwen-Think vs. Qwen-NoThink → reasoning vs. non-reasoning mode difference
+
+\begin{table*}[t]
+  \caption{%
+    Accuracy (\%) and total generated token count ($T_\mathrm{total}$, in parentheses)
+    for all conditions across repetition counts $k \in \{1,\ldots,5\}$.
+    \textsc{Qwen-Think} uses thinking enabled; \textsc{Qwen-NoThink} uses thinking
+    disabled.
+    \textbf{Bold} marks the best accuracy per model mode.
+    $\dagger$ denotes a statistically significant improvement over Direct~(D)
+    at $p < 0.1$ (McNemar test).
+    [-- ] indicates the condition is not applicable (e.g.\ thinking token counts for
+    the non-reasoning model).
+  }
+  \label{tab:main-results}
+  \vskip 0.15in
+  \begin{center}
+  \begin{small}
+  \begin{tabular}{lcccccc}
+    \toprule
+    & \multicolumn{3}{c}{\textit{\textsc{Qwen-Think} (reasoning on)}}
+    & \multicolumn{3}{c}{\textit{\textsc{Qwen-NoThink} (reasoning off)}} \\
+    \cmidrule(lr){2-4} \cmidrule(lr){5-7}
+    Condition ($k$)
+      & Acc.\ (\%) & $T_\mathrm{think}$ & $T_\mathrm{total}$
+      & Acc.\ (\%) & $T_\mathrm{think}$ & $T_\mathrm{total}$ \\
+    \midrule
+    \multicolumn{7}{c}{\textit{TRS Reasoning-Skill (math)}} \\
+    Direct (D)            & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{SR}_1$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{SR}_2$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{SR}_3$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{SR}_4$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{SR}_5$       & --   & --  & --  & --   & {[--]} & --  \\
+    \midrule
+    $\mathrm{PR}_1$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{PR}_3$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{PR}_5$       & --   & --  & --  & --   & {[--]} & --  \\
+    \midrule
+    $\mathrm{RT}_1$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{RT}_3$       & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{RT}_5$       & --   & --  & --  & --   & {[--]} & --  \\
+    \midrule
+    $\mathrm{Fill}_1$     & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{Fill}_3$     & --   & --  & --  & --   & {[--]} & --  \\
+    $\mathrm{Fill}_5$     & --   & --  & --  & --   & {[--]} & --  \\
+    \bottomrule
+  \end{tabular}
+  \end{small}
+  \end{center}
+  \vskip -0.1in
+\end{table*}
+
+\subsection{Ablation Study}
+\label{subsec:ablation}
+
+% TODO: populate after ablation experiments are complete.
+% Two ablation axes:
+%   1. Context positioning (pre-problem / post-problem / within thinking)
+%   2. Noise baselines (Filler / Irrelevant Reasoning) at matched token length
+
+\begin{figure}[h]
+  \centering
+  \includegraphics[width=\linewidth]{example-image}
+  \caption{%
+    Accuracy as a function of repetition count $k$ for all four conditions
+    (\textsc{D}, $\mathrm{SR}_k$, $\mathrm{PR}_k$, $\mathrm{RT}_k$) under
+    \textsc{Qwen-Think} (solid) and \textsc{Qwen-NoThink} (dashed).
+    The shaded band shows $\pm 1$ standard deviation across seeds.
+    A peak followed by decline would support the cognitive-overload hypothesis.
+  }
+  \label{fig:accuracy-vs-k}
+\end{figure}
+
+\subsection{Qualitative Results}
+\label{subsec:qualitative}
+
+% TODO: include 2–3 representative examples after experiments are complete.
+% Each example should show side-by-side outputs for:
+%   Direct (D) | SR_1 | SR_3 | SR_5
+% highlighting changes in reasoning verbosity and error patterns.
